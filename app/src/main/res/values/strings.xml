@@ -33,5 +33,6 @@
     <string name="title_activity_quest">Quest</string>
     <string name="title_activity_history">History</string>
     <string name="title_activity_running">Running</string>
+    <string name="title_activity_promotion">Promotion</string>
 
 </resources>
