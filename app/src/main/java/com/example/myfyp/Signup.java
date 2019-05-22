@@ -29,7 +29,7 @@ public class Signup extends AppCompatActivity {
     EditText user;
     EditText pass;
     EditText conpass ;
-    String URL_SERVER ="http://192.168.0.107/boons/server.php";
+    String URL_SERVER ="http://192.168.43.238/boons/server.php";
     ProgressBar loading ;
     Button cancel;
     Button submit;
@@ -87,15 +87,16 @@ public class Signup extends AppCompatActivity {
             final String username = user.getText().toString().trim();
             final String password = pass.getText().toString().trim();
 
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_SERVER,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
                             try {
                                 JSONObject jsonObject = new JSONObject(response);
-                                String success = jsonObject.getString("success");
+                                String success = jsonObject.optString("success");
 
-                                if (success.equals("1"))
+                                if (success.equalsIgnoreCase("1"))
                                 {
                                     Toast.makeText(Signup.this, "Register Success ", Toast.LENGTH_SHORT).show();
                                     Intent Login = new Intent(Signup.this, Login.class);
@@ -132,7 +133,6 @@ public class Signup extends AppCompatActivity {
                 }
             };
 
-            RequestQueue requestQueue = Volley.newRequestQueue(this);
             requestQueue.add(stringRequest);
         }
 
