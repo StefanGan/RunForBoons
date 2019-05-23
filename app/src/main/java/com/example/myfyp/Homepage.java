@@ -65,7 +65,7 @@ public class Homepage extends AppCompatActivity
         navUsername = (TextView) headerView.findViewById(R.id.userid);
         totalScore = (TextView) headerView.findViewById(R.id.totalscore);
 
-        // navUsername.setText(username);
+
        // totalScore.setText("Total Steps: 1000");
         viewUser();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -81,6 +81,7 @@ public class Homepage extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Intent running = new Intent(Homepage.this, Running.class);
+                running.putExtra("username",username);
                 startActivity(running);
             }
         });
@@ -153,7 +154,7 @@ public class Homepage extends AppCompatActivity
 
     public void viewUser(){
 
-
+        navUsername.setText(username);
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_SERVER,
                 new Response.Listener<String>() {
@@ -168,7 +169,7 @@ public class Homepage extends AppCompatActivity
                             if (success.equals("1"))
                             {
                                 String ttlscore = jsonObject.getString("totalscore");
-                                navUsername.setText(username);
+
                                 if(ttlscore.equals(null)){
                                     totalScore.setText("No Record Yet");
                                 }else {
