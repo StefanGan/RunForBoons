@@ -6,8 +6,6 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -44,20 +42,14 @@ public class Running extends AppCompatActivity implements SensorEventListener, S
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_running);
+        Intent run = getIntent();
+        username = run.getStringExtra("username");
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Intent run = getIntent();
-        username = run.getStringExtra("username");
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
+
 
         // Get an instance of the SensorManager
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -69,6 +61,7 @@ public class Running extends AppCompatActivity implements SensorEventListener, S
         BtnStart = (Button) findViewById(R.id.btn_start);
         BtnStop = (Button) findViewById(R.id.btn_stop);
         BtnStop.setVisibility(View.GONE);
+
 
 
 
@@ -89,7 +82,7 @@ public class Running extends AppCompatActivity implements SensorEventListener, S
 
             @Override
             public void onClick(View arg0) {
-                score = Integer.toString(numSteps);
+
                 onRunning();
                 sensorManager.unregisterListener(Running.this);
 
@@ -122,6 +115,8 @@ public class Running extends AppCompatActivity implements SensorEventListener, S
 
     public void onRunning(){
 
+
+        score = Integer.toString(numSteps);
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_SERVER,
                 new Response.Listener<String>() {
@@ -131,12 +126,13 @@ public class Running extends AppCompatActivity implements SensorEventListener, S
                             JSONObject jsonObject = new JSONObject(response);
                             String success = jsonObject.optString("success");
 
-                            if (success.equalsIgnoreCase("1"))
+                            if (success.equals("1"))
                             {
                                 BtnStart.setVisibility(View.VISIBLE);
                                 BtnStop.setVisibility(View.GONE);
                                 Toast.makeText(Running.this, "Successful recorded. ", Toast.LENGTH_SHORT).show();
                                 Intent Homepage = new Intent(Running.this, Homepage.class);
+                                Homepage.putExtra("username",username);
                                 startActivity(Homepage);
                             }else{
                                 BtnStart.setVisibility(View.VISIBLE);
@@ -167,7 +163,7 @@ public class Running extends AppCompatActivity implements SensorEventListener, S
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("selectFn","fnRunning");
-                params.put("steps",score);
+                params.put("score",score);
                 params.put("username",username);
 
                 return params;

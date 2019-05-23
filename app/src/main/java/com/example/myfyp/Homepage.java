@@ -2,9 +2,7 @@ package com.example.myfyp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -39,6 +37,7 @@ public class Homepage extends AppCompatActivity
     String username;
     String URL_SERVER = "http://192.168.0.102/boons/server.php";
     TextView navUsername, totalScore;
+    String totals;
 
 
     @Override
@@ -51,14 +50,7 @@ public class Homepage extends AppCompatActivity
         username = login.getStringExtra("username");
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
@@ -68,6 +60,7 @@ public class Homepage extends AppCompatActivity
 
        // totalScore.setText("Total Steps: 1000");
         viewUser();
+        totals = totalScore.getText().toString().trim();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -135,13 +128,18 @@ public class Homepage extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             Intent HomePage = new Intent(Homepage.this, Homepage.class);
+            HomePage.putExtra("username",username);
             startActivity(HomePage);
         } else if (id == R.id.nav_quest) {
             Intent Quest = new Intent(Homepage.this, Quest.class);
+            Quest.putExtra("username",username);
+            Quest.putExtra("totalscore",totals);
             startActivity(Quest);
 
         } else if (id == R.id.nav_history) {
             Intent History = new Intent(Homepage.this, History.class);
+            History.putExtra("username",username);
+            History.putExtra("totalscore",totals);
             startActivity(History);
 
 
@@ -173,7 +171,7 @@ public class Homepage extends AppCompatActivity
                                 if(ttlscore.equals(null)){
                                     totalScore.setText("No Record Yet");
                                 }else {
-                                    totalScore.setText(ttlscore);
+                                    totalScore.setText("Total Steps : " + ttlscore);
                                 }
 
                             }

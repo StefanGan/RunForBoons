@@ -9,14 +9,14 @@
     tools:showIn="@layout/app_bar_quest">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/questdis2"
         android:layout_width="341dp"
         android:layout_height="99dp"
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/questname2" />
 
     <Button
         android:id="@+id/promote2"
@@ -26,10 +26,10 @@
         android:layout_marginLeft="4dp"
         android:text="Redeem"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/questdis2" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/questname2"
         android:layout_width="369dp"
         android:layout_height="32dp"
         android:layout_marginStart="4dp"
@@ -37,10 +37,10 @@
         android:layout_marginTop="16dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/promote" />
+        app:layout_constraintTop_toBottomOf="@+id/promote1" />
 
     <TextView
-        android:id="@+id/questname"
+        android:id="@+id/questname1"
         android:layout_width="375dp"
         android:layout_height="32dp"
         android:layout_marginStart="4dp"
@@ -51,22 +51,22 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/questdis"
         android:layout_width="341dp"
         android:layout_height="99dp"
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/questname" />
+        app:layout_constraintTop_toBottomOf="@+id/questname1" />
 
     <Button
-        android:id="@+id/promote"
+        android:id="@+id/promote1"
         android:layout_width="387dp"
         android:layout_height="49dp"
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
         android:text="Redeem"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/questdis" />
 </android.support.constraint.ConstraintLayout>

@@ -82,18 +82,17 @@ public class Login extends AppCompatActivity {
 
 
 
-                            if (success.equals("1"))
-                            {
+                            if (success.equals("1")) {
                                 Toast.makeText(Login.this, "Login Success ", Toast.LENGTH_SHORT).show();
                                 Intent Homepage = new Intent(Login.this, Homepage.class);
-                                Homepage.putExtra("username",username);
+                                Homepage.putExtra("username", username);
                                 startActivity(Homepage);
                             }
 
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(Login.this, "Login Error"+ e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this, "Login Error "+ e.toString(), Toast.LENGTH_SHORT).show();
                             loading.setVisibility(View.GONE);
                             Logbtn.setVisibility(View.VISIBLE);
                         }

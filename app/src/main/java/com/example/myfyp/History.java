@@ -2,9 +2,7 @@ package com.example.myfyp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,26 +11,32 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 public class History extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    String username , totals;
+    TextView navUsername, totalScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
+        Intent login = getIntent();
+        username = login.getStringExtra("username");
+        totals = login.getStringExtra("totalscore");
+
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        navUsername = (TextView) headerView.findViewById(R.id.userid);
+        totalScore = (TextView) headerView.findViewById(R.id.totalscore);
+        navUsername.setText(username);
+        totalScore.setText(totals);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -66,6 +70,8 @@ public class History extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.logout) {
+            Intent Login = new Intent(History.this, Login.class);
+            startActivity(Login);
             return true;
         }
 
@@ -80,13 +86,18 @@ public class History extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             Intent HomePage = new Intent(History.this, Homepage.class);
+            HomePage.putExtra("username",username);
             startActivity(HomePage);
         } else if (id == R.id.nav_quest) {
             Intent Quest = new Intent(History.this, Quest.class);
+            Quest.putExtra("username",username);
+            Quest.putExtra("totalscore",totals);
             startActivity(Quest);
 
         } else if (id == R.id.nav_history) {
             Intent History = new Intent(History.this, History.class);
+            History.putExtra("username",username);
+            History.putExtra("totalscore",totals);
             startActivity(History);
 
 

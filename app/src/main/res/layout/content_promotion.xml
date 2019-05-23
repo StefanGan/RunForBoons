@@ -55,7 +55,7 @@
         app:layout_constraintTop_toBottomOf="@+id/promterm" />
 
     <TextView
-        android:id="@+id/promocode"
+        android:id="@+id/promcode"
         android:layout_width="383dp"
         android:layout_height="60dp"
         android:layout_marginTop="8dp"
@@ -68,6 +68,6 @@
         android:layout_width="385dp"
         android:layout_height="92dp"
         android:text="TextView"
-        app:layout_constraintTop_toBottomOf="@+id/promocode"
+        app:layout_constraintTop_toBottomOf="@+id/promcode"
         tools:layout_editor_absoluteX="10dp" />
 </android.support.constraint.ConstraintLayout>
