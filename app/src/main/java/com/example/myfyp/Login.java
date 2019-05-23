@@ -25,7 +25,7 @@ import java.util.Map;
 
 
 public class Login extends AppCompatActivity {
-    String URL_SERVER = "http://192.168.0.107/boons/server.php";
+    String URL_SERVER = "http://192.168.0.101/boons/server.php";
     String username , password;
     EditText Id , Password;
     ProgressBar loading ;
@@ -71,7 +71,7 @@ public class Login extends AppCompatActivity {
         password = Password.getText().toString().trim();
 
 
-
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_SERVER,
                 new Response.Listener<String>() {
                     @Override
@@ -121,7 +121,7 @@ public class Login extends AppCompatActivity {
             }
         };
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
         requestQueue.add(stringRequest);
     }
 }

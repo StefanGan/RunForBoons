@@ -35,10 +35,11 @@ public class Homepage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Button startbtn;
-    Intent login = getIntent();
-    String username = login.getStringExtra("username");
+
+    String username;
     String URL_SERVER = "http://192.168.0.102/boons/server.php";
     TextView navUsername, totalScore;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,8 @@ public class Homepage extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
+        Intent login = getIntent();
+        username = login.getStringExtra("username");
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -61,12 +64,16 @@ public class Homepage extends AppCompatActivity
         View headerView = navigationView.getHeaderView(0);
         navUsername = (TextView) headerView.findViewById(R.id.userid);
         totalScore = (TextView) headerView.findViewById(R.id.totalscore);
+
+        // navUsername.setText(username);
+       // totalScore.setText("Total Steps: 1000");
         viewUser();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
 
 
         startbtn = (Button) findViewById(R.id.startbtn);
@@ -147,7 +154,7 @@ public class Homepage extends AppCompatActivity
     public void viewUser(){
 
 
-
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_SERVER,
                 new Response.Listener<String>() {
                     @Override
@@ -160,9 +167,14 @@ public class Homepage extends AppCompatActivity
 
                             if (success.equals("1"))
                             {
-                                String ttlscore = jsonObject.optString("totalscore");
+                                String ttlscore = jsonObject.getString("totalscore");
                                 navUsername.setText(username);
-                                totalScore.setText(ttlscore);
+                                if(ttlscore.equals(null)){
+                                    totalScore.setText("No Record Yet");
+                                }else {
+                                    totalScore.setText(ttlscore);
+                                }
+
                             }
 
 
@@ -194,7 +206,7 @@ public class Homepage extends AppCompatActivity
             }
         };
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
         requestQueue.add(stringRequest);
     }
 }
