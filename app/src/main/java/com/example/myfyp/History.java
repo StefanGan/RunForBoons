@@ -12,11 +12,29 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class History extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     String username , totals;
-    TextView navUsername, totalScore;
+    String URL_SERVER = "http://192.168.0.101/boons/server.php";
+    TextView navUsername, totalScore,name , date , des , code;;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +54,21 @@ public class History extends AppCompatActivity
         navUsername = (TextView) headerView.findViewById(R.id.userid);
         totalScore = (TextView) headerView.findViewById(R.id.totalscore);
         navUsername.setText(username);
-        totalScore.setText(totals);
+        totalScore.setText("Total Steps : " + totals);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        name = (TextView)findViewById(R.id.name);
+        date = (TextView)findViewById(R.id.date);
+        des = (TextView)findViewById(R.id.des);
+        code = (TextView)findViewById(R.id.code);
+
+        onHistory();
+
+
     }
 
     @Override
@@ -106,5 +133,66 @@ public class History extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void onHistory(){
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_SERVER,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.optString("success");
+
+                            if (success.equals("1"))
+                            {
+                                String n = jsonObject.getString("name");
+                                String dat = jsonObject.getString("date");
+                                String de = jsonObject.getString("des");
+                                String cod = jsonObject.getString("code");
+
+                                name.setText(n);
+                                date.setText(dat);
+                                des.setText(de);
+                                code.setText(cod);
+
+
+                            }else{
+
+                                Toast.makeText(History.this, "Failed data recorded. ", Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(History.this, ""+ e.toString(), Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(History.this, "Error"+ error.toString(), Toast.LENGTH_SHORT).show();
+
+
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("selectFn","fnHistory");
+                params.put("username",username);
+
+
+
+                return params;
+            }
+        };
+
+        requestQueue.add(stringRequest);
     }
 }

@@ -30,7 +30,7 @@ import java.util.Map;
 public class Running extends AppCompatActivity implements SensorEventListener, StepListener {
     TextView TvSteps;
     String username , score;
-    String URL_SERVER="http://192.168.0.103/boons/server.php";
+    String URL_SERVER="http://192.168.0.101/boons/server.php";
     Button BtnStart,BtnStop;
     StepDetector simpleStepDetector;
     SensorManager sensorManager;

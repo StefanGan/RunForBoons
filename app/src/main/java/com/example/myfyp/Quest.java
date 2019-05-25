@@ -33,7 +33,7 @@ public class Quest extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
         String username, totals, verify1 , verify2 , promid1 , promid2, ttls , require1 , require2;
-        String URL_SERVER = "http://192.168.0.103/boons/server.php";
+        String URL_SERVER = "http://192.168.0.101/boons/server.php";
         TextView quest1 , quest2 , questdis1 , questdis2;
         Button promo1 , promo2;
         TextView navUsername, totalScore;
@@ -112,7 +112,7 @@ public class Quest extends AppCompatActivity
             public void onClick(View v) {
                 Intent promo = new Intent(Quest.this, Promotion.class);
                 promo.putExtra("username",username);
-                promo.putExtra("promoid",promid2);
+                promo.putExtra("promid",promid2);
                 startActivity(promo);
             }
         });
