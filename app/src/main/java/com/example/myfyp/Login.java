@@ -25,7 +25,7 @@ import java.util.Map;
 
 
 public class Login extends AppCompatActivity {
-    String URL_SERVER = "http://192.168.0.102/boons/server.php";
+    String URL_SERVER = "http://192.168.0.103/boons/server.php";
     String username , password;
     EditText Id , Password;
     ProgressBar loading ;
@@ -41,8 +41,7 @@ public class Login extends AppCompatActivity {
         loading = (ProgressBar) findViewById(R.id.loading);
         loading.setVisibility(View.GONE);
 
-        username = Id.getText().toString().trim();
-        password = Password.getText().toString().trim();
+
 
 
             Logbtn = (Button) findViewById(R.id.LoginBtn);
@@ -69,8 +68,6 @@ public class Login extends AppCompatActivity {
         loading.setVisibility(View.VISIBLE);
         username = Id.getText().toString().trim();
         password = Password.getText().toString().trim();
-
-
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_SERVER,
                 new Response.Listener<String>() {
@@ -82,7 +79,7 @@ public class Login extends AppCompatActivity {
 
 
 
-                            if (success.equals("1")) {
+                            if (success.equals("1"))    {
                                 Toast.makeText(Login.this, "Login Success ", Toast.LENGTH_SHORT).show();
                                 Intent Homepage = new Intent(Login.this, Homepage.class);
                                 Homepage.putExtra("username", username);

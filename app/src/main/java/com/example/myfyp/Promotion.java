@@ -25,7 +25,7 @@ import java.util.Map;
 public class Promotion extends AppCompatActivity {
 
     String username , promid;
-    String URL_SERVER = "http://192.168.0.102/boons/server.php";
+    String URL_SERVER = "http://192.168.0.103/boons/server.php";
     TextView promname, promdis , promterm, promcode , company;
     Button redeem;
 

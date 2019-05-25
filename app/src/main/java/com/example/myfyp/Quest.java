@@ -33,7 +33,7 @@ public class Quest extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
         String username, totals, verify1 , verify2 , promid1 , promid2, ttls , require1 , require2;
-        String URL_SERVER = "http://192.168.0.102/boons/server.php";
+        String URL_SERVER = "http://192.168.0.103/boons/server.php";
         TextView quest1 , quest2 , questdis1 , questdis2;
         Button promo1 , promo2;
         TextView navUsername, totalScore;
@@ -57,7 +57,7 @@ public class Quest extends AppCompatActivity
         navUsername = (TextView) headerView.findViewById(R.id.userid);
         totalScore = (TextView) headerView.findViewById(R.id.totalscore);
         navUsername.setText(username);
-        totalScore.setText(totals);
+        totalScore.setText("Total Steps : " + totals);
 
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -71,14 +71,13 @@ public class Quest extends AppCompatActivity
         quest2 = (TextView)findViewById(R.id.questname2);
         questdis1 = (TextView)findViewById(R.id.questdis);
         questdis2 = (TextView)findViewById(R.id.questdis2);
+        total = Integer.parseInt(totals);
         onQuest();
-        total = Integer.parseInt(ttls);
-        r1 = Integer.parseInt(require1);
-        r2 = Integer.parseInt(require2);
 
 
 
-       /* if (verify1.equals("0"))
+        /*
+        if (verify1.equals("0"))
         {
             quest1.setVisibility(View.GONE);
             questdis1.setVisibility(View.GONE);
@@ -91,12 +90,9 @@ public class Quest extends AppCompatActivity
         promo1 = (Button)findViewById(R.id.promote1);
         promo2 = (Button)findViewById(R.id.promote2);
 
-        if (r1 > total ){
-            promo1.setVisibility(View.GONE);
-        }
-        if (r2 > total){
-            promo2.setVisibility(View.GONE);
-        }
+
+
+
 
         promo1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -208,9 +204,20 @@ public class Quest extends AppCompatActivity
                                 verify2 = jsonObject.getString("verify2");
                                 promid1 = jsonObject.getString("promid1");
                                 promid2 = jsonObject.getString("promid2");
-                                ttls = jsonObject.getString("totalscore");
-                                require1 = jsonObject.getString("require");
-                                require2 = jsonObject.getString("require2");
+                               ttls = jsonObject.getString("totalscore");
+                               require1 = jsonObject.getString("require1");
+                              require2 = jsonObject.getString("require2");
+
+
+                                r1 = Integer.parseInt(require1);
+                                r2 = Integer.parseInt(require2);
+
+                                if (r1 > total){
+                                    promo1.setVisibility(View.GONE);
+                                }
+                                if (r2 > total){
+                                    promo2.setVisibility(View.GONE);
+                                }
 
 
                                 quest1.setText(q1);

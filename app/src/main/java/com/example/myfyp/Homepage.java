@@ -35,9 +35,9 @@ public class Homepage extends AppCompatActivity
     Button startbtn;
 
     String username;
-    String URL_SERVER = "http://192.168.0.102/boons/server.php";
+    String URL_SERVER = "http://192.168.0.103/boons/server.php";
     TextView navUsername, totalScore;
-    String totals;
+    String totals , ttlscore;
 
 
     @Override
@@ -56,6 +56,8 @@ public class Homepage extends AppCompatActivity
         View headerView = navigationView.getHeaderView(0);
         navUsername = (TextView) headerView.findViewById(R.id.userid);
         totalScore = (TextView) headerView.findViewById(R.id.totalscore);
+
+        navUsername.setText(username);
 
 
        // totalScore.setText("Total Steps: 1000");
@@ -133,13 +135,13 @@ public class Homepage extends AppCompatActivity
         } else if (id == R.id.nav_quest) {
             Intent Quest = new Intent(Homepage.this, Quest.class);
             Quest.putExtra("username",username);
-            Quest.putExtra("totalscore",totals);
+            Quest.putExtra("totalscore",ttlscore);
             startActivity(Quest);
 
         } else if (id == R.id.nav_history) {
             Intent History = new Intent(Homepage.this, History.class);
             History.putExtra("username",username);
-            History.putExtra("totalscore",totals);
+            History.putExtra("totalscore",ttlscore);
             startActivity(History);
 
 
@@ -152,7 +154,7 @@ public class Homepage extends AppCompatActivity
 
     public void viewUser(){
 
-        navUsername.setText(username);
+
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_SERVER,
                 new Response.Listener<String>() {
@@ -166,7 +168,7 @@ public class Homepage extends AppCompatActivity
 
                             if (success.equals("1"))
                             {
-                                String ttlscore = jsonObject.getString("totalscore");
+                                ttlscore = jsonObject.getString("totalscore");
 
                                 if(ttlscore.equals(null)){
                                     totalScore.setText("No Record Yet");
