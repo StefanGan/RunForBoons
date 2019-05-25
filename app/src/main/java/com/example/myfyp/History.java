@@ -187,8 +187,6 @@ public class History extends AppCompatActivity
                 params.put("selectFn","fnHistory");
                 params.put("username",username);
 
-
-
                 return params;
             }
         };

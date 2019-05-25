@@ -222,8 +222,8 @@ public class Quest extends AppCompatActivity
 
                                 quest1.setText(q1);
                                 quest2.setText(q2);
-                                questdis1.setText(qd1);
-                                questdis2.setText(qd2);
+                                questdis1.setText(qd1 + "                "+total+" / "+require1);
+                                questdis2.setText(qd2 + "                "+total+" / "+require2);
                             }else{
 
                                 Toast.makeText(Quest.this, "Failed data recorded. ", Toast.LENGTH_SHORT).show();

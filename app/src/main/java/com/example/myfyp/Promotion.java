@@ -98,6 +98,7 @@ public class Promotion extends AppCompatActivity {
                                     promcode.setText(pcode);
                                 }else{
                                     promcode.setText("THE CODE HAD BEEN REDEEMED");
+                                    redeem.setVisibility(View.GONE);
                                 }
 
                                 redeem.setText(pprice + "OFF DISCOUNT REDEEM!");

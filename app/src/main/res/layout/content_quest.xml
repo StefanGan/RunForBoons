@@ -32,10 +32,12 @@
         android:id="@+id/questname2"
         android:layout_width="369dp"
         android:layout_height="32dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="88dp"
         android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="18dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/promote1" />
 
@@ -47,6 +49,8 @@
         android:layout_marginLeft="4dp"
         android:layout_marginTop="32dp"
         android:text="TextView"
+        android:textSize="18dp"
+        android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -69,4 +73,32 @@
         android:text="Redeem"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questdis" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="382dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="Invalid/Unsucces"
+        android:textAlignment="center"
+        android:textColor="@color/red"
+        android:textColorHighlight="@color/black"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@+id/promote2"
+        app:layout_constraintTop_toTopOf="@+id/promote2" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="382dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="Invalid/Unsucces"
+        android:textAlignment="center"
+        android:textColor="@color/red"
+        android:textColorHighlight="@color/black"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@+id/promote1"
+        app:layout_constraintTop_toTopOf="@+id/promote1" />
 </android.support.constraint.ConstraintLayout>

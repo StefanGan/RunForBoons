@@ -15,6 +15,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
+        android:textAlignment="center"
+        android:textSize="18dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -60,14 +62,22 @@
         android:layout_height="60dp"
         android:layout_marginTop="8dp"
         android:text="TextView"
-        app:layout_constraintTop_toBottomOf="@+id/promterm"
-        tools:layout_editor_absoluteX="8dp" />
+        android:textAlignment="center"
+        android:textColor="@color/blue"
+        android:textColorHighlight="@color/black"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@+id/redeem"
+        app:layout_constraintTop_toBottomOf="@+id/promterm" />
 
     <TextView
         android:id="@+id/company"
         android:layout_width="385dp"
         android:layout_height="92dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:textAlignment="center"
+        android:textSize="23dp"
         android:text="TextView"
-        app:layout_constraintTop_toBottomOf="@+id/promcode"
-        tools:layout_editor_absoluteX="10dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/promcode" />
 </android.support.constraint.ConstraintLayout>
