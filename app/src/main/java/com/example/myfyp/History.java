@@ -31,7 +31,7 @@ import java.util.Map;
 public class History extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     String username , totals;
-    String URL_SERVER = "http://192.168.0.101/boons/server.php";
+    String URL_SERVER = "http://192.168.0.105/boons/server.php";
     TextView navUsername, totalScore,name , date , des , code;;
 
 

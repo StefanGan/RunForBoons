@@ -25,7 +25,7 @@ import java.util.Map;
 
 
 public class Login extends AppCompatActivity {
-    String URL_SERVER = "http://192.168.0.101/boons/server.php";
+    String URL_SERVER = "http://192.168.0.105/boons/server.php";
     String username , password;
     EditText Id , Password;
     ProgressBar loading ;
