@@ -25,16 +25,19 @@ import java.util.Map;
 
 
 public class Login extends AppCompatActivity {
-    String URL_SERVER = "http://192.168.0.105/boons/server.php";
+    String URL_SERVER = "http://192.168.43.238/boons/server.php";
     String username , password;
     EditText Id , Password;
     ProgressBar loading ;
     Button Logbtn;
+    DatabaseHelper db;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_main);
         Id = (EditText) findViewById(R.id.IdText);
         Password = (EditText) findViewById(R.id.password);
@@ -65,6 +68,7 @@ public class Login extends AppCompatActivity {
 
     public void Login(){
 
+        db = new DatabaseHelper(this);
         loading.setVisibility(View.VISIBLE);
         username = Id.getText().toString().trim();
         password = Password.getText().toString().trim();
@@ -80,10 +84,21 @@ public class Login extends AppCompatActivity {
 
 
                             if (success.equals("1"))    {
-                                Toast.makeText(Login.this, "Login Success ", Toast.LENGTH_SHORT).show();
-                                Intent Homepage = new Intent(Login.this, Homepage.class);
-                                Homepage.putExtra("username", username);
-                                startActivity(Homepage);
+                                String pass = jsonObject.getString("password");
+                                boolean res = db.checkUser(pass, password);
+                                if(res) {
+                                    Toast.makeText(Login.this, "Login Success ", Toast.LENGTH_SHORT).show();
+                                    Intent Homepage = new Intent(Login.this, Homepage.class);
+                                    Homepage.putExtra("username", username);
+                                    startActivity(Homepage);
+                                }else
+                                {
+                                    Toast.makeText(Login.this, "Login Error", Toast.LENGTH_SHORT).show();
+                                    loading.setVisibility(View.GONE);
+                                }
+                            }else{
+                                Toast.makeText(Login.this, "Login Error", Toast.LENGTH_SHORT).show();
+                                loading.setVisibility(View.GONE);
                             }
 
 
@@ -111,7 +126,6 @@ public class Login extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 params.put("selectFn","fnLogin");
                 params.put("username",username);
-                params.put("password",password);
 
                 return params;
             }

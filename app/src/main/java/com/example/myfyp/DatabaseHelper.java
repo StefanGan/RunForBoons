@@ -9,10 +9,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME="boons.db";
-    public static final String TABLE_NAME="User";
-    public static final String USER_ID="User_ID";
-    public static final String USER_NAME="User_name";
-    public static final String USER_PASS="User_password";
+    public static final String TABLE_NAME="Password";
+    public static final String PASS_ID="Pass_ID";
+    public static final String PASS_PASS="Pass_real";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -20,7 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE User (User_ID INTEGER PRIMARY  KEY AUTOINCREMENT, User_name TEXT, User_password TEXT)");
+        sqLiteDatabase.execSQL("CREATE TABLE Password (Pass_ID INTEGER PRIMARY  KEY AUTOINCREMENT, Pass_real TEXT)");
     }
 
     @Override
@@ -29,21 +28,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public long addUser(String user, String password){
+    public Cursor addUser(String password){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("User_name",user);
-        contentValues.put("User_password",password);
-        long res = db.insert("User",null,contentValues);
+        contentValues.put("Pass_real",password);
+        long res = db.insert("Password",null,contentValues);
         db.close();
-        return  res;
+        SQLiteDatabase dba = getReadableDatabase();
+        String[] columns = { PASS_ID};
+        String selection =  PASS_PASS + "=?";
+        String[] selectionArgs = {password};
+        Cursor cursor = dba.query(TABLE_NAME,columns,selection,selectionArgs,null,null,null);
+
+        return  cursor;
     }
 
-    public boolean checkUser(String username, String password){
-        String[] columns = { USER_ID};
+    public boolean checkUser(String pass_id, String password){
+        String[] columns = { PASS_ID};
         SQLiteDatabase db = getReadableDatabase();
-        String selection = USER_NAME + "=?" + " and " + USER_PASS + "=?";
-        String[] selectionArgs = { username, password };
+        String selection = PASS_ID + "=?" + " and " + PASS_PASS + "=?";
+        String[] selectionArgs = { pass_id, password };
         Cursor cursor = db.query(TABLE_NAME,columns,selection,selectionArgs,null,null,null);
         int count = cursor.getCount();
         cursor.close();
@@ -55,21 +59,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return  false;
     }
 
-    public boolean checkUser1(String username){
-        String[] columns = { USER_ID};
-        SQLiteDatabase db = getReadableDatabase();
-        String selection = USER_NAME + "=?" ;
-        String[] selectionArgs = { username};
-        Cursor cursor = db.query(TABLE_NAME,columns,selection,selectionArgs,null,null,null);
-        int count = cursor.getCount();
-        cursor.close();
-        db.close();
-
-        if(count>0)
-            return  true;
-        else
-            return  false;
-    }
 
 
 }

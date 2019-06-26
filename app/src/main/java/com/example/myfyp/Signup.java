@@ -1,6 +1,7 @@
 package com.example.myfyp;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -29,10 +30,12 @@ public class Signup extends AppCompatActivity {
     EditText user;
     EditText pass;
     EditText conpass ;
-    String URL_SERVER ="http://192.168.0.105/boons/server.php";
+    String URL_SERVER ="http://192.168.43.238/boons/server.php";
     ProgressBar loading ;
     Button cancel;
     Button submit;
+    DatabaseHelper db;
+    String ppass;
 
 
     @Override
@@ -46,6 +49,7 @@ public class Signup extends AppCompatActivity {
         cancel = (Button) findViewById(R.id.Cancel);
         submit = (Button) findViewById(R.id.Signup);
         loading.setVisibility(View.GONE);
+        db = new DatabaseHelper(this);
 
 
 
@@ -64,12 +68,19 @@ public class Signup extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
+                final String username = user.getText().toString().trim();
                 String password = pass.getText().toString().trim();
                 String confirm_pass = conpass.getText().toString().trim();
 
         if (password.equals(confirm_pass)){
+
+            Cursor cursor = db.addUser(password);
+            while(cursor.moveToNext()) {
+                ppass = cursor.getString(0);
+            }
                 Regist();
+
+
             }else
         {
             Toast.makeText(Signup.this, "Password not match", Toast.LENGTH_SHORT).show();
@@ -98,9 +109,11 @@ public class Signup extends AppCompatActivity {
 
                                 if (success.equalsIgnoreCase("1"))
                                 {
-                                    Toast.makeText(Signup.this, "Register Success ", Toast.LENGTH_SHORT).show();
-                                    Intent Login = new Intent(Signup.this, Login.class);
-                                    startActivity(Login);
+
+                                        Toast.makeText(Signup.this, "Register Success ", Toast.LENGTH_SHORT).show();
+                                        Intent Login = new Intent(Signup.this, Login.class);
+                                        startActivity(Login);
+
                                 }else{
 
                                     Toast.makeText(Signup.this, "Failed. ", Toast.LENGTH_SHORT).show();
@@ -130,7 +143,7 @@ public class Signup extends AppCompatActivity {
                     Map<String, String> params = new HashMap<>();
                     params.put("selectFn","fnSignup");
                     params.put("username",username);
-                    params.put("password",password);
+                    params.put("password",ppass);
 
                     return params;
                 }
