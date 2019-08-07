@@ -1,104 +1,202 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Quest"
     tools:showIn="@layout/app_bar_quest">
 
-    <TextView
-        android:id="@+id/questdis2"
-        android:layout_width="341dp"
-        android:layout_height="99dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/questname2" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/promote2"
-        android:layout_width="387dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:text="Redeem"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/questdis2" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/questname2"
-        android:layout_width="369dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="88dp"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:textSize="18dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/promote1" />
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:text="TextView" />
 
-    <TextView
-        android:id="@+id/questname1"
-        android:layout_width="375dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="32dp"
-        android:text="TextView"
-        android:textSize="18dp"
-        android:textAlignment="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="82dp"
+                android:text="TextView" />
 
-    <TextView
-        android:id="@+id/questdis"
-        android:layout_width="341dp"
-        android:layout_height="99dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/questname1" />
+            <TextView
+                android:id="@+id/textViewr1"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:text="DONE"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="#0944DB"
+                android:textIsSelectable="false"
+                android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/promote1"
-        android:layout_width="387dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:text="Redeem"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/questdis" />
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="382dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="Invalid/Unsucces"
-        android:textAlignment="center"
-        android:textColor="@color/red"
-        android:textColorHighlight="@color/black"
-        android:textSize="18dp"
-        app:layout_constraintStart_toStartOf="@+id/promote2"
-        app:layout_constraintTop_toTopOf="@+id/promote2" />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:text="TextView" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="382dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="Invalid/Unsucces"
-        android:textAlignment="center"
-        android:textColor="@color/red"
-        android:textColorHighlight="@color/black"
-        android:textSize="18dp"
-        app:layout_constraintStart_toStartOf="@+id/promote1"
-        app:layout_constraintTop_toTopOf="@+id/promote1" />
-</android.support.constraint.ConstraintLayout>
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="match_parent"
+                android:layout_height="82dp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textViewr2"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:text="DONE"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="#0944DB"
+                android:textIsSelectable="false"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="match_parent"
+                android:layout_height="82dp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textViewr3"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:text="DONE"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="#0944DB"
+                android:textIsSelectable="false"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textView44"
+                android:layout_width="match_parent"
+                android:layout_height="82dp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textViewr4"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:text="DONE"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="#0944DB"
+                android:textIsSelectable="false"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textView55"
+                android:layout_width="match_parent"
+                android:layout_height="82dp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textViewr5"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:text="DONE"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="#0944DB"
+                android:textIsSelectable="false"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textView66"
+                android:layout_width="match_parent"
+                android:layout_height="82dp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textViewr6"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:text="DONE"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="#0944DB"
+                android:textIsSelectable="false"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/button6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
