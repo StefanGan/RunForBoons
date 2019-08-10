@@ -24,13 +24,15 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Running extends AppCompatActivity implements SensorEventListener, StepListener {
     TextView TvSteps;
-    String username , score;
-    String URL_SERVER="http://192.168.43.238/boons/server.php";
+    String username , score , currentdate;
+    String URL_SERVER="http://192.168.0.9/boons/server.php";
     Button BtnStart,BtnStop;
     StepDetector simpleStepDetector;
     SensorManager sensorManager;
@@ -47,6 +49,9 @@ public class Running extends AppCompatActivity implements SensorEventListener, S
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+        Calendar calendar = Calendar.getInstance();
+        currentdate = DateFormat.getDateInstance().format(calendar.getTime());
 
 
 
@@ -165,6 +170,7 @@ public class Running extends AppCompatActivity implements SensorEventListener, S
                 params.put("selectFn","fnRunning");
                 params.put("score",score);
                 params.put("username",username);
+                params.put("currentdate",currentdate);
 
                 return params;
             }

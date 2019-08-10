@@ -35,7 +35,7 @@ public class Homepage extends AppCompatActivity
     Button startbtn;
 
     String username;
-    String URL_SERVER = "http://192.168.43.238/boons/server.php";
+    String URL_SERVER = "http://192.168.0.9/boons/server.php";
     TextView navUsername, totalScore;
     String totals , ttlscore;
 

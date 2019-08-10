@@ -30,7 +30,7 @@ public class Signup extends AppCompatActivity {
     EditText user;
     EditText pass;
     EditText conpass ;
-    String URL_SERVER ="http://192.168.43.238/boons/server.php";
+    String URL_SERVER ="http://192.168.0.9/boons/server.php";
     ProgressBar loading ;
     Button cancel;
     Button submit;

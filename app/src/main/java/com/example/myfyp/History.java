@@ -24,6 +24,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,8 +32,20 @@ import java.util.Map;
 public class History extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     String username , totals;
-    String URL_SERVER = "http://192.168.43.238/boons/server.php";
-    TextView navUsername, totalScore,name , date , des , code;;
+    String URL_SERVER = "http://192.168.0.9/boons/server.php";
+    TextView navUsername, totalScore;
+    TextView date1 , steps1;
+    TextView date2 , steps2;
+    TextView date3 , steps3;
+    TextView date4 , steps4;
+    TextView date5 , steps5;
+    TextView date6 , steps6;
+    TextView date7 , steps7;
+    TextView date8 , steps8;
+    TextView date9 , steps9;
+    TextView date10 , steps10;
+    int num;
+
 
 
 
@@ -61,10 +74,27 @@ public class History extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        name = (TextView)findViewById(R.id.name);
-        date = (TextView)findViewById(R.id.date);
-        des = (TextView)findViewById(R.id.des);
-        code = (TextView)findViewById(R.id.code);
+        date1 = (TextView)findViewById(R.id.textView1);
+        steps1 = (TextView)findViewById(R.id.textView11);
+        date2 = (TextView)findViewById(R.id.textView2);
+        steps2 = (TextView)findViewById(R.id.textView22);
+        date3 = (TextView)findViewById(R.id.textView3);
+        steps3 = (TextView)findViewById(R.id.textView33);
+        date4 = (TextView)findViewById(R.id.textView4);
+        steps4 = (TextView)findViewById(R.id.textView44);
+        date5 = (TextView)findViewById(R.id.textView5);
+        steps5 = (TextView)findViewById(R.id.textView55);
+        date6 = (TextView)findViewById(R.id.textView6);
+        steps6 = (TextView)findViewById(R.id.textView66);
+        date7 = (TextView)findViewById(R.id.textView7);
+        steps7 = (TextView)findViewById(R.id.textView77);
+        date8 = (TextView)findViewById(R.id.textView8);
+        steps8 = (TextView)findViewById(R.id.textView88);
+        date9 = (TextView)findViewById(R.id.textView9);
+        steps9 = (TextView)findViewById(R.id.textView99);
+        date10 = (TextView)findViewById(R.id.textView10);
+        steps10 = (TextView)findViewById(R.id.textView1010);
+
 
         onHistory();
 
@@ -144,10 +174,10 @@ public class History extends AppCompatActivity
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            String success = jsonObject.optString("success");
+                            //String success = jsonObject.optString("success");
 
-                            if (success.equals("1"))
-                            {
+                           // if (success.equals("1"))
+                           // {
                                 String n = jsonObject.getString("name");
                                 String dat = jsonObject.getString("date");
                                 String de = jsonObject.getString("des");
@@ -159,10 +189,10 @@ public class History extends AppCompatActivity
                                 code.setText(cod);
 
 
-                            }else{
+                           // }else{
 
-                                Toast.makeText(History.this, "Failed data recorded. ", Toast.LENGTH_SHORT).show();
-                            }
+                            //    Toast.makeText(History.this, "Failed data recorded. ", Toast.LENGTH_SHORT).show();
+                           //   }
 
 
                         } catch (JSONException e) {
