@@ -40,7 +40,7 @@ public class Quest extends AppCompatActivity
         String verify4 , promid4 , require4;
         String verify5 , promid5 , require5;
         String verify6 , promid6 , require6;
-        String URL_SERVER = "http://192.168.0.9/boons/server.php";
+        String URL_SERVER = "http://192.168.43.238/boons/server.php";
         TextView quest1 , quest2 , quest3, quest4, quest5, quest6;
         TextView questdis1 , questdis2 , questdis3, questdis4 , questdis5, questdis6;
         TextView req1 , req2 , req3 , req4 , req5 , req6 ;

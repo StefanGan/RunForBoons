@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,32 +20,27 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class History extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    String username , totals;
-    String URL_SERVER = "http://192.168.0.9/boons/server.php";
+    String username , totals ;
+    String URL_history = "http://192.168.43.238/boons/history.php";
+    String URL_SERVER = "http://192.168.43.238/boons/server.php";
     TextView navUsername, totalScore;
-    TextView date1 , steps1;
-    TextView date2 , steps2;
-    TextView date3 , steps3;
-    TextView date4 , steps4;
-    TextView date5 , steps5;
-    TextView date6 , steps6;
-    TextView date7 , steps7;
-    TextView date8 , steps8;
-    TextView date9 , steps9;
-    TextView date10 , steps10;
-    int num;
+    TextView date1 , steps1 ;
+    LinearLayout linear;
+
+    int num , id;
 
 
 
@@ -74,29 +70,14 @@ public class History extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        date1 = (TextView)findViewById(R.id.textView1);
-        steps1 = (TextView)findViewById(R.id.textView11);
-        date2 = (TextView)findViewById(R.id.textView2);
-        steps2 = (TextView)findViewById(R.id.textView22);
-        date3 = (TextView)findViewById(R.id.textView3);
-        steps3 = (TextView)findViewById(R.id.textView33);
-        date4 = (TextView)findViewById(R.id.textView4);
-        steps4 = (TextView)findViewById(R.id.textView44);
-        date5 = (TextView)findViewById(R.id.textView5);
-        steps5 = (TextView)findViewById(R.id.textView55);
-        date6 = (TextView)findViewById(R.id.textView6);
-        steps6 = (TextView)findViewById(R.id.textView66);
-        date7 = (TextView)findViewById(R.id.textView7);
-        steps7 = (TextView)findViewById(R.id.textView77);
-        date8 = (TextView)findViewById(R.id.textView8);
-        steps8 = (TextView)findViewById(R.id.textView88);
-        date9 = (TextView)findViewById(R.id.textView9);
-        steps9 = (TextView)findViewById(R.id.textView99);
-        date10 = (TextView)findViewById(R.id.textView10);
-        steps10 = (TextView)findViewById(R.id.textView1010);
+
+        linear = (LinearLayout)findViewById(R.id.linear);
+
+
 
 
         onHistory();
+        callHistory();
 
 
     }
@@ -174,25 +155,18 @@ public class History extends AppCompatActivity
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            //String success = jsonObject.optString("success");
+                            String success = jsonObject.optString("success");
 
-                           // if (success.equals("1"))
-                           // {
-                                String n = jsonObject.getString("name");
-                                String dat = jsonObject.getString("date");
-                                String de = jsonObject.getString("des");
-                                String cod = jsonObject.getString("code");
-
-                                name.setText(n);
-                                date.setText(dat);
-                                des.setText(de);
-                                code.setText(cod);
+                            if (success.equals("1"))
+                            {
+                                id = jsonObject.getInt("User_id");
 
 
-                           // }else{
 
-                            //    Toast.makeText(History.this, "Failed data recorded. ", Toast.LENGTH_SHORT).show();
-                           //   }
+                            }else{
+
+                                Toast.makeText(History.this, "Failed data recorded. ", Toast.LENGTH_SHORT).show();
+                            }
 
 
                         } catch (JSONException e) {
@@ -217,10 +191,71 @@ public class History extends AppCompatActivity
                 params.put("selectFn","fnHistory");
                 params.put("username",username);
 
+
+
                 return params;
             }
         };
 
         requestQueue.add(stringRequest);
+    }
+
+    public void callHistory(){
+
+
+
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                URL_history,null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // Do something with response
+                        //mTextView.setText(response.toString());
+
+                        // Process the JSON
+                        try{
+                            // Loop through the array elements
+                            for(int i=0;i<response.length();i++){
+                                // Get current json object
+                                JSONObject student = response.getJSONObject(i);
+
+                                // Get the current student (json object) data
+                                String date = student.getString("Day_date");
+                                String steps = student.getString("Score_day");
+                                int idd = student.getInt("User_ID");
+
+                                if ( idd == id) {
+                                    TextView tv = new TextView(getApplicationContext());
+                                    tv.setText(date + "\nSteps : "+ steps);
+                                    linear.addView(tv);
+                                TextView tv1 = new TextView(getApplicationContext());
+                                tv1.setText("-----------------------------------------------------------");
+                                linear.addView(tv1);
+
+                               }else {
+                                //    break;
+                               }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(History.this, ""+ e.toString(), Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(History.this, "Error"+ error.toString(), Toast.LENGTH_SHORT).show();
+
+
+            }
+        })
+        ;
+
+        requestQueue.add(jsonArrayRequest);
     }
 }
