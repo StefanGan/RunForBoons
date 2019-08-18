@@ -1,10 +1,4 @@
-# MyFYP0
-
-# Team member :
-1. Gan Jun Xian
-2. Chin Jia Yin
-3. Alex Haw Thing Mun
-4. Ong Li Min
+# Run For Boons
 
 This application are unique in get some offer code by running around , for example , you can complete a quest for a 15% offer on some website by running to a goal steps, and this can offer the motivation to the user for run more.
 
